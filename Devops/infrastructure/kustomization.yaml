@@ -5,3 +5,4 @@ resources:
   - aws-lb-controller
   - namespace
   - aws-ebs-driver 
+  - ingress
