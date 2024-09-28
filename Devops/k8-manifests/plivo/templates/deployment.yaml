@@ -48,7 +48,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: DATABASE_URL
-              value: "postgresql+asyncpg://postgres:postgres@postgresql:5432/plivo"
+              value: "postgresql+asyncpg://postgres.cyxkwrkcqlsvclrfluta:ViYQBATiMCcnoTtm@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres"
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
