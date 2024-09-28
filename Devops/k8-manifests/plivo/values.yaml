@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  image: harsha3330/plivo:main-12-date-20240928-132142
+  image: harsha3330/plivo:main-13-date-20240928-132654
   repository: nginx
   pullPolicy: IfNotPresent
   tag: ""
