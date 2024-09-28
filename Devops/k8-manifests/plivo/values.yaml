@@ -68,13 +68,30 @@ resources:
   #   memory: 128Mi
 
 livenessProbe:
+  enabled: true
+  initialDelaySeconds: 15
+  periodSeconds: 5
+  timeoutSeconds: 3
+  successThreshold: 1
+  failureThreshold: 3
   httpGet:
     path: /
-    port: http
+    port: 8000
+    scheme: HTTP
+
 readinessProbe:
+  enabled: true
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 3
+  successThreshold: 1
+  failureThreshold: 3
   httpGet:
     path: /
-    port: http
+    port: 8000
+    scheme: HTTP
+
+
 
 autoscaling:
   enabled: false
