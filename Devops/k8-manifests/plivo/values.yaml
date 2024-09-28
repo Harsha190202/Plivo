@@ -38,7 +38,7 @@ service:
   port: 8000
 
 ingress:
-  enabled: true
+  enabled: false
   className: ""
   annotations:
     {}
