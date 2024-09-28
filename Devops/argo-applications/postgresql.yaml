@@ -3,7 +3,7 @@ kind: Application
 metadata:
   annotations:
     notifications.argoproj.io/subscribe.teams: channelName
-  name: postgres
+  name: postgresql
   namespace: argocd
 spec:
   destination:
