@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.teams: channelName
+  name: plivo-backend
+  namespace: argocd
+spec:
+  destination:
+    namespace: applications
+    server: "https://kubernetes.default.svc"
+  source:
+    path: Devops/k8-manifests/plivo
+    repoURL: "https://github.com/Harsha190202/Plivo.git"
+    targetRevision: main
+    helm:
+      valueFiles:
+        - values.yaml
+  project: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
