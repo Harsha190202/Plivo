@@ -20,6 +20,6 @@ spec:
   values:
     server:
       service:
-        type: LoadBalancer
+        type: ClusterIP
         annotations:
           service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
