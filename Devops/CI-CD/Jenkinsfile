@@ -41,11 +41,13 @@ pipeline {
 
         stage("Docker Build and Push") {
             steps {
-                script {
-                    sh "docker login"
-                    sh "docker build -f Backend/Dockerfile -t backend ."
-                    sh "docker tag backend:latest ${dockerImage}"
-                    sh "docker push ${dockerImage}"
+                dir('Backend'){
+                    script {
+                        sh "docker login"
+                        sh "docker build -f Dockerfile -t backend ."
+                        sh "docker tag backend:latest ${dockerImage}"
+                        sh "docker push ${dockerImage}"
+                    }
                 }
             }
         }
