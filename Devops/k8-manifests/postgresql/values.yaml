@@ -1,0 +1,28 @@
+replicaCount: 1
+postgresql:
+  username: postgres
+  password: postgres
+  database: plivo
+  port: 5432
+
+persistence:
+  enabled: true
+  size: 5Gi
+  storageClass: standard
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "500m"
+  limits:
+    memory: "1Gi"
+    cpu: "1"
+
+image:
+  repository: postgres
+  tag: "13"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5432
