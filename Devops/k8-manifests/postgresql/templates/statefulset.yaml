@@ -56,9 +56,7 @@ kind: StorageClass
 metadata:
   name: {{ .Values.persistence.storageClass }}
 provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
 parameters:
-  type: gp2  
+  type: gp3
   fsType: ext4
-  volumeBindingMode: WaitForFirstConsumer  
-reclaimPolicy: Delete  
-allowVolumeExpansion: true 
