@@ -3,6 +3,7 @@ sqlalchemy
 pydantic
 python-dotenv
 asyncpg
+psycopg2-binary
 
 
 
