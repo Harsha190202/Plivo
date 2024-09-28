@@ -10,6 +10,7 @@ from .routes import message as message_routes
 import logging
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO) 
+logger.debug("Starting the application...")
 
 app = FastAPI()
 
@@ -30,9 +31,14 @@ def home():
 
 @app.on_event("startup")
 async def startup_event():
-    async with engine.begin() as conn:
-        await conn.run_sync(user.Base.metadata.create_all)
-        await conn.run_sync(message.Base.metadata.create_all)
+    logger.debug("Running startup event...")
+    try:
+        async with engine.begin() as conn:
+            await conn.run_sync(user.Base.metadata.create_all)
+            await conn.run_sync(message.Base.metadata.create_all)
+            logger.debug("Database tables created/initialized.")
+    except Exception as e:
+        logger.error(f"Error during startup: {e}")
 
 @app.on_event("shutdown")
 async def shutdown_event():
