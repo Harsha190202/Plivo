@@ -1,32 +1,3 @@
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: postgresql-pv
-spec:
-  capacity:
-    storage: 5Gi 
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Delete
-  storageClassName: standard
-  awsElasticBlockStore:
-    volumeID: vol-0c48a4bf39dd02c7e
-    fsType: ext4
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: postgresql-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi  
-  storageClassName: standard  
-
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -49,17 +20,18 @@ spec:
             - containerPort: {{ .Values.postgresql.port }}
           env:
             - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-secret
-                  key: username
+              value: "{{ .Values.postgresql.username }}"
             - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgresql-secret
-                  key: password
+              value: "{{ .Values.postgresql.password }}"
             - name: POSTGRES_DB
-              value: {{ .Values.postgresql.database }}
+              value: "{{ .Values.postgresql.database }}"
+          resources:
+            requests:
+              memory: "{{ .Values.resources.requests.memory }}"
+              cpu: "{{ .Values.resources.requests.cpu }}"
+            limits:
+              memory: "{{ .Values.resources.limits.memory }}"
+              cpu: "{{ .Values.resources.limits.cpu }}"
           volumeMounts:
             - name: postgresql-persistent-storage
               mountPath: /var/lib/postgresql/data
@@ -67,3 +39,27 @@ spec:
         - name: postgresql-persistent-storage
           persistentVolumeClaim:
             claimName: postgresql-pvc
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgresql-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size }}
+  storageClassName: {{ .Values.persistence.storageClass }}
+
+---
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.persistence.storageClass }}
+provisioner: ebs.csi.aws.com
+parameters:
+  type: gp2 
+  fsType: ext4
