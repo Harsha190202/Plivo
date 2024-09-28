@@ -50,6 +50,9 @@ spec:
     requests:
       storage: {{ .Values.persistence.size }}
   storageClassName: {{ .Values.persistence.storageClass }}
+   awsElasticBlockStore:
+    volumeID: vol-0c48a4bf39dd02c7e
+    fsType: ext4
 ---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
