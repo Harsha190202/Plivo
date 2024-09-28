@@ -6,8 +6,8 @@ metadata:
     app: postgresql
 spec:
   ports:
-    - port: { { .Values.service.port } }
-      targetPort: { { .Values.postgresql.port } }
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.postgresql.port }}
   clusterIP: None
   selector:
     app: postgresql

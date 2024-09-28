@@ -4,7 +4,7 @@ metadata:
   name: postgresql
 spec:
   serviceName: postgresql-headless
-  replicas: { { .Values.replicaCount } }
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: postgresql
@@ -17,7 +17,7 @@ spec:
         - name: postgresql
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
-            - containerPort: { { .Values.postgresql.port } }
+            - containerPort: {{ .Values.postgresql.port }}
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -30,7 +30,7 @@ spec:
                   name: postgresql-secret
                   key: password
             - name: POSTGRES_DB
-              value: { { .Values.postgresql.database } }
+              value: {{ .Values.postgresql.database }}
           volumeMounts:
             - name: postgresql-persistent-storage
               mountPath: /var/lib/postgresql/data
@@ -48,5 +48,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: { { .Values.persistence.size } }
-  storageClassName: { { .Values.persistence.storageClass } }
+      storage: {{ .Values.persistence.size }}
+  storageClassName: {{ .Values.persistence.storageClass }}
