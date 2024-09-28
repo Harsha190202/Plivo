@@ -68,7 +68,6 @@ resources:
   #   memory: 128Mi
 
 livenessProbe:
-  enabled: true
   initialDelaySeconds: 15
   periodSeconds: 5
   timeoutSeconds: 3
@@ -80,7 +79,6 @@ livenessProbe:
     scheme: HTTP
 
 readinessProbe:
-  enabled: true
   initialDelaySeconds: 5
   periodSeconds: 5
   timeoutSeconds: 3
