@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: fluentd
+  namespace: flux-system
+spec:
+  url: https://fluent.github.io/helm-charts

@@ -1,0 +1,23 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: fluentd
+  namespace: logging
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: fluentd
+      version: 0.12.0 
+      sourceRef:
+        kind: HelmRepository
+        name: fluentd
+        namespace: flux-system
+  values:
+    config:
+      output:
+        type: elasticsearch
+        elasticsearch:
+          host: "elasticsearch.logging.svc.cluster.local"
+          port: 9200
+
