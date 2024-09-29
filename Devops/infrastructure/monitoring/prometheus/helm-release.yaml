@@ -19,6 +19,16 @@ spec:
         type: ClusterIP
       persistentVolume:
         enabled: false
+      alerting:
+        alertmanagers:
+          - namespace: monitoring
+            name: prometheus-alertmanager
+            port: 9093
+      additionalRules:
+        - name: custom-alerts
+          configMap:
+            name: prometheus-alerts
+            key: alerts.yml
     alertmanager:
       enabled: true
     kube-state-metrics:
