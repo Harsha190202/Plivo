@@ -90,6 +90,8 @@ readinessProbe:
     scheme: HTTP
 
 
+maxUnavailable: 1
+
 
 autoscaling:
   enabled: true
