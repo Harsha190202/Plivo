@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
   - plivo-backend.yaml
   - postgresql.yaml
+  - plivo-frontend.yaml
