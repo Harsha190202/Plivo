@@ -5,6 +5,7 @@ const WelcomePage = () => {
   return (
     <div>
       <h1>Welcome to the Message App</h1>
+      <h3>{`${process.env.REACT_APP_BACKEND_URL}`}</h3>
       <nav className="home-nav">
         <ul>
           <li>

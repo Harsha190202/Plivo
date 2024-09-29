@@ -15,6 +15,7 @@ const MessagesPage = () => {
         const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/get/messages/${userId}`);
         if (response.data.length > 0) {
           setMessages(response.data);
+          console.log(`${process.env.REACT_APP_BACKEND_URL}/get/messages/${userId}`)
         } else if (response.status === 404) {
           setError("No messages found for the provided User ID.");
         } else {
