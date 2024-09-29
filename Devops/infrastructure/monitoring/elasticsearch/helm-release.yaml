@@ -1,7 +1,24 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
-kind: HelmRepository
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
 metadata:
-  name: elastic
-  namespace: flux-system
+  name: elasticsearch
+  namespace: logging
 spec:
-  url: https://helm.elastic.co
+  interval: 5m
+  chart:
+    spec:
+      chart: elasticsearch
+      version: 7.17.0 
+      sourceRef:
+        kind: HelmRepository
+        name: elastic
+        namespace: flux-system
+  values:
+    replicas: 2
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 100m
+    service:
+      type: ClusterIP
+
