@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/Harsha190202/EKS.git
+    repoURL: https://github.com/Harsha190202/Plivo.git
     targetRevision: main
     path: Devops/k8-manifests/plivo-frontend
   destination:
