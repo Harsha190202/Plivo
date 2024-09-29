@@ -15,24 +15,26 @@ spec:
         namespace: monitoring
   values:
     loki:
+      chunksCache:
+        enabled: false 
       commonConfig:
-        replication_factor: 1
+        replication_factor: 1  
       schemaConfig:
         configs:
           - from: 2020-10-24
-            store: boltdb
-            object_store: filesystem
+            store: boltdb  
+            object_store: filesystem  
             schema: v11
             index:
-              prefix: index_
-              period: 168h
+              prefix: index_  
+              period: 168h  
       storage_config:
         boltdb:
-          directory: /tmp/loki/boltdb
+          directory: /tmp/loki/boltdb  
         filesystem:
-          directory: /tmp/loki/chunks
+          directory: /tmp/loki/chunks  
       limits_config:
-        enforce_metric_name: false
+        enforce_metric_name: false  
     persistence:
-      enabled: false 
-    singleBinary: true 
+      enabled: false  
+    singleBinary: true  
