@@ -1,0 +1,21 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: my-elasticsearch
+  namespace: logging  
+spec:
+  version: 8.5.1  
+  nodeSets:
+    - name: default
+      count: 2
+      podTemplate:
+        spec:
+          containers:
+            - name: elasticsearch
+              resources:
+                limits:
+                  memory: 2Gi
+                  cpu: 1
+                requests:
+                  memory: 1Gi
+                  cpu: 500m
