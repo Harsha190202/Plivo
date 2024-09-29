@@ -15,8 +15,6 @@ spec:
         namespace: monitoring
   values:
     loki:
-      chunksCache:
-        enabled: false 
       commonConfig:
         replication_factor: 1  
       schemaConfig:
@@ -35,6 +33,9 @@ spec:
           directory: /tmp/loki/chunks  
       limits_config:
         enforce_metric_name: false  
+      auth_enabled: false  
+      pattern_ingester:
+        enabled: false  
     persistence:
       enabled: false  
     singleBinary: true  
