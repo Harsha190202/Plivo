@@ -4,5 +4,5 @@ resources:
   - prometheus
   - grafana
   - fluentd
-  # - elasticsearch
+  - elasticsearch
 
