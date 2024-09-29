@@ -58,8 +58,8 @@ pipeline {
         stage("Docker Build and Push") {
             steps {
                 script {
-                    sh "docker build -f k8-Frontend/Dockerfile-node -t mocktest-frontend ."
-                    sh "docker tag mocktest-frontend:latest ${dockerImage}"
+                    sh "docker build -f k8-Frontend/Dockerfile-node -t plivo-frontend ."
+                    sh "docker tag plivo-frontend:latest ${dockerImage}"
                     sh "docker push ${dockerImage}"
                 }
             }
