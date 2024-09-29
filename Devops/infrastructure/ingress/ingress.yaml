@@ -25,5 +25,5 @@ spec:
               service:
                 name: plivo-frontend
                 port:
-                  number: 80
+                  number: 3000
           
