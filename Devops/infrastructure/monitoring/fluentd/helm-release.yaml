@@ -8,7 +8,7 @@ spec:
   chart:
     spec:
       chart: fluentd
-      version: 0.12.0 
+      version: 0.5.2 
       sourceRef:
         kind: HelmRepository
         name: fluentd
@@ -18,6 +18,5 @@ spec:
       output:
         type: elasticsearch
         elasticsearch:
-          host: "elasticsearch.logging.svc.cluster.local"
+          host: "elasticsearch-master.logging.svc.cluster.local"  
           port: 9200
-
