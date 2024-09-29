@@ -15,4 +15,4 @@ spec:
         namespace: monitoring
   values:
     service:
-      type: ClusterIP
+      type: LoadBalancer
