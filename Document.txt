@@ -1,0 +1,62 @@
+Project is divided into frontend , backend and devops (Related pictures are uploaded to Pics folder)
+
+Backend : Implemented the required routes with python , used fastapi 
+framework after reading many articles its similary to express framework so used it 
+and for datalayer used postgres , used supabase db while development and switched to postgres 
+stateful set in eks
+
+Running the service : 
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+
+
+Frontend : 
+Implemented mainly 4 pages to visually our backend , homepage for routing , get message by id page 
+create page and search page , deployed into s3 and eks as well , just for my testing , you can find
+two jenkinsfile for frontend , one will deploy it into s3 , one will deploy it into eks 
+
+Running the service: 
+npm install 
+npm start
+
+Devops : 
+
+folders : 
+
+Terraform : used terraform to create the whole infra which consists of vpc , eks and jenkins server
+Used the modules provided by terraform , other wise we write our own and tell the path in source
+written one module for example 
+
+After creating aws infrastruture ---> I installed fluxcd in eks , Flux Entry Point : Devops/clusters/plivo
+So All the resources mentioned in the entrypoint , flux takes them as single source of truth and 
+sync them into cluster 
+
+if we have multiple cluster then it will be easy for us to use overlays and base folders and we would we have 
+version control as well with flux 
+
+Mainly I have used two folder to sync repo with eks 
+1.argo-applications (if We have 100's microservices it will be good to add them into 
+projects etc for maintaining them)
+2.infrastruture (services infra)
+Has everything that is needed , I installed everything using helmrelease , we can change the values and
+flux will sync them 
+
+infrastruture contains argocd , aws alb controller , monitoring , ingress resources , network policies etc
+
+For monitoring I used prometheus , fluentd as Deamonset , elastic search for log storage and added them as 
+datasources in grafana with local dns name without exposing them .
+
+Currently as we dont many microservcices , I did not add istio , I thought it may slow the 
+existing infrastruture as the load increases very much 
+
+Jenkinsfile are in CI/CD 
+
+Used Sonarqube , trivy , docker for building and testing and argo for microservices continous delivery
+
+The argocd applications are installed in declarative way and I kept in sync with k8-manifests folder 
+
+Used helm for one backend service and added normal files for frontend service 
+
+Setting up infra : 
+create eks and install flux to sync the folder(Devops/clusters/Plivo)
+
