@@ -15,31 +15,30 @@ spec:
         namespace: monitoring
   values:
     loki:
-      config:
-        auth_enabled: false
-        server:
-          http_listen_port: 3100
-        ingester:
-          chunk_idle_period: 5m
-          chunk_inactive_period: 5m
-          max_chunk_size: 1048576
-          wal:
-            enabled: true
-        schemaConfig:
-          configs:
-            - from: 2022-01-01
-              store: boltdb-shipper
-              chunk_store: boltdb-shipper
-              index_store: boltdb-shipper
-        storage:
-          bucketNames:
-            chunks: my-chunks-bucket  
-        memberlistConfig:
-          join_members:
-            - loki-memberlist.default.svc.cluster.local
-        limits_config:
-          ingestion_rate_mb: 5
-          ingestion_burst_size_mb: 10
-        table_manager:
-          retention_deletes_enabled: true
-          retention_period: 30d
+      auth_enabled: false
+      server:
+        http_listen_port: 3100
+      ingester:
+        chunk_idle_period: 5m
+        chunk_inactive_period: 5m
+        max_chunk_size: 1048576
+        wal:
+          enabled: true
+      schemaConfig:
+        configs:
+          - from: 2022-01-01
+            store: boltdb-shipper
+            chunk_store: boltdb-shipper
+            index_store: boltdb-shipper
+      storage:
+        bucketNames:
+          chunks: my-chunks-bucket  
+      memberlistConfig:
+        join_members:
+          - loki-memberlist.default.svc.cluster.local
+      limits_config:
+        ingestion_rate_mb: 5
+        ingestion_burst_size_mb: 10
+      table_manager:
+        retention_deletes_enabled: true
+        retention_period: 30d
