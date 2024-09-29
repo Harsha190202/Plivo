@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const WelcomePage = () => {
   return (
-    <div>
+    <div className="welcome">
       <h1>Welcome to the Message App</h1>
-      <h3>{`${process.env.REACT_APP_BACKEND_URL}`}</h3>
+      <h4>Backend Server : {`${process.env.REACT_APP_BACKEND_URL}`}</h4>
       <nav className="home-nav">
         <ul>
           <li>
