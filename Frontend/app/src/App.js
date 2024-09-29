@@ -7,7 +7,7 @@ import SearchPage from "./pages/SearchPage";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/plivo-frontend">
       <Routes>
         <Route path="/" element={<WelcomePage />} />
         <Route path="/messages" element={<MessagesPage />} />
