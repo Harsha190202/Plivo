@@ -53,9 +53,17 @@ spec:
       containers:
         - name: elastic-operator
           image: elastic/eck-operator:2.14.0
-          args: ["operator"]
+          command:
+            - /manager  
           env:
             - name: WATCH_NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
