@@ -19,4 +19,11 @@ spec:
                 name: plivo-backend
                 port:
                   number: 8000
+          - path: /plivo-frontend
+            pathType: Prefix
+            backend:
+              service:
+                name: plivo-frontend
+                port:
+                  number: 80
           
