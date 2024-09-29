@@ -1,0 +1,7 @@
+FROM node:20.16-slim
+WORKDIR /app
+COPY Frontend/app/package*.json ./
+RUN npm install
+COPY Frontend/app/ ./
+EXPOSE 3000
+CMD ["npm", "start"]

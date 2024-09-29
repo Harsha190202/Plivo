@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: plivo-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plivo-frontend
+  template:
+    metadata:
+      labels:
+        app: plivo-frontend
+    spec:
+      containers:
+        - name: plivo-frontend
+          image: harsha3330/plivo-frontend:master-32-date-20240823-160945
+          ports:
+            - containerPort: 80

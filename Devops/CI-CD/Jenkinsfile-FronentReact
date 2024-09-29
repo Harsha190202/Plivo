@@ -1,0 +1,96 @@
+pipeline {
+    agent any
+    
+    tools {
+        nodejs 'NodeJS22'
+    }
+    
+    environment { 
+        registryCredential = 'harsha3330-dockerhub'
+        buildTimestamp = new java.text.SimpleDateFormat('yyyyMMdd-HHmmss').format(new java.util.Date())
+        dockerImage = "harsha3330/plivo-frontend:${env.FrontendBranch}-${env.BUILD_NUMBER}-date-${buildTimestamp}"
+        SONARQUBE_ENV = 'SonarQube'
+    }
+    
+    stages {
+
+        stage('Cleaning Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
+
+        stage('Charts from Git') {
+            steps {
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Harsha190202/Plivo.git'
+            }
+        }
+        
+        
+        
+
+        stage("Front-end Dependencies") {
+            steps {
+                dir("./Frontend/app") {
+                    script {
+                        sh "npm cache clean --force"
+                        sh "npm install"
+                    }
+                }
+            }
+        }
+        
+        
+
+
+        stage('SonarQube Analysis') {
+            steps {
+                dir("./Frontend/app") {
+                    withSonarQubeEnv(SONARQUBE_ENV) {
+                        sh 'npx sonar-scanner' 
+                    }
+                }       
+            }   
+        }
+
+
+        stage("Docker Build and Push") {
+            steps {
+                script {
+                    sh "docker build -f k8-Frontend/Dockerfile-node -t mocktest-frontend ."
+                    sh "docker tag mocktest-frontend:latest ${dockerImage}"
+                    sh "docker push ${dockerImage}"
+                }
+            }
+        }
+
+
+        stage("TRIVY Image Scan") {
+            steps {
+                sh "trivy image ${dockerImage} > trivyimage.txt" 
+                sh "docker rmi ${dockerImage}"
+            }
+        }
+
+
+        
+
+         stage("Deployment") {
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'github-pat', variable: 'GITHUB_TOKEN')]) {
+                    sh """
+                    sed -i 's|image: .*|image: ${dockerImage}|g' Devops/k8-manifests/plivo-frontend/deployment.yaml
+                    git add Devops/k8-manifests/plivo-frontend/deployment.yaml
+                    git commit -m "Jenkins image update"
+                    git pull https://${GITHUB_TOKEN}@github.com/Harsha190202/Plivo.git main
+                    git push https://${GITHUB_TOKEN}@github.com/Harsha190202/Plivo.git main
+                    """
+                    }
+                }
+            }
+        }
+        
+    }
+}
