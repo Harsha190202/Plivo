@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: plivo-frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -17,3 +22,4 @@ spec:
           image: harsha3330/plivo-frontend:main-3-date-20240929-071012
           ports:
             - containerPort: 3000
+
