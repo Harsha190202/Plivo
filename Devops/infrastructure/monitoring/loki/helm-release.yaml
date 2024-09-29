@@ -1,31 +1,20 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: loki
   namespace: monitoring
 spec:
-  releaseName: loki
-  interval: 1m
+  interval: 5m
   chart:
     spec:
       chart: loki
+      version: 6.12.0 
       sourceRef:
         kind: HelmRepository
         name: grafana-loki
         namespace: monitoring
   values:
-    loki:
-      config:
-        table_manager:
-          retention_deletes_enabled: true
     persistence:
-      enabled: false  
-    service:
-      type: ClusterIP
-    resources:
-      requests:
-        cpu: 100m
-        memory: 200Mi
-      limits:
-        cpu: 200m
-        memory: 400Mi
+      enabled: false 
+    retention: "24h" 
+    
