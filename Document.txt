@@ -1,11 +1,12 @@
-Project is divided into frontend , backend and devops (Related pictures are uploaded to Pics folder)
+Project is divided into frontend , backend and devops (Related pictures are uploaded to Pictures folder)
 
-Backend : Implemented the required routes with python , used fastapi 
+Backend : Implemented the required routes with python using fastapi ,
 framework after reading many articles its similary to express framework so used it 
-and for datalayer used postgres , used supabase db while development and switched to postgres 
+and for data layer I used postgres , used supabase db while development and switched to postgres 
 stateful set in eks
 
 Running the service : 
+cd Backend
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 
@@ -16,12 +17,11 @@ create page and search page , deployed into s3 and eks as well , just for my tes
 two jenkinsfile for frontend , one will deploy it into s3 , one will deploy it into eks 
 
 Running the service: 
+cd Frontend/app
 npm install 
 npm start
 
 Devops : 
-
-folders : 
 
 Terraform : used terraform to create the whole infra which consists of vpc , eks and jenkins server
 Used the modules provided by terraform , other wise we write our own and tell the path in source
@@ -35,28 +35,40 @@ if we have multiple cluster then it will be easy for us to use overlays and base
 version control as well with flux 
 
 Mainly I have used two folder to sync repo with eks 
-1.argo-applications (if We have 100's microservices it will be good to add them into 
-projects etc for maintaining them)
-2.infrastruture (services infra)
+1.argo-applications (for microservcices)(added this for having ui so it will easier to maintain them )
+2.infrastruture (for normal services)
 Has everything that is needed , I installed everything using helmrelease , we can change the values and
 flux will sync them 
 
 infrastruture contains argocd , aws alb controller , monitoring , ingress resources , network policies etc
 
 For monitoring I used prometheus , fluentd as Deamonset , elastic search for log storage and added them as 
-datasources in grafana with local dns name without exposing them .
+datasources in grafana with local dns name without exposing them and exposed grafana .
 
 Currently as we dont many microservcices , I did not add istio , I thought it may slow the 
-existing infrastruture as the load increases very much 
+existing infrastruture as they  increase memory and cpu very much 
 
-Jenkinsfile are in CI/CD 
+Jenkinsfile are in CI/CD folder
 
 Used Sonarqube , trivy , docker for building and testing and argo for microservices continous delivery
 
-The argocd applications are installed in declarative way and I kept in sync with k8-manifests folder 
+The argocd applications are installed in declarative way and I kept them in sync with k8-manifests folder 
 
-Used helm for one backend service and added normal files for frontend service 
+Used helmcharts for backend service and added normal files for frontend service 
+
+applications have deployment containing replicaset , pods used rolling update strategy with HPA (with average metrics), Pod Disruption
+budget , Added pod security to run them as nonroot users , added one network policy so that pods in application namespace
+cant talk to other namespace ,we can node anti-affinity for high available service .
+
+Exposed microservcices with ingress resource (to expose services to internet) with path based routing(added all routes in single resource)
+
 
 Setting up infra : 
 create eks and install flux to sync the folder(Devops/clusters/Plivo)
+
+**  Destroyed the infrastructure to make this repo public , Pictures are placed in pictures folder for reference 
+
+Thank you sir 
+
+
 
