@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: plivo-frontend
-          image: harsha3330/plivo-frontend:main-2-date-20240929-065309
+          image: harsha3330/plivo-frontend:main-3-date-20240929-071012
           ports:
             - containerPort: 3000
