@@ -6,3 +6,4 @@ resources:
   - namespace
   - aws-ebs-driver 
   - ingress
+  - monitoring
