@@ -1,8 +1,5 @@
 __pycache__/
 *.pyc
-.env
-
-
 
 
 # Dependency directories
@@ -17,7 +14,7 @@ coverage/
 out/
 
 # Environment files
-.env
+
 .env.local
 .env.development.local
 .env.test.local
@@ -51,7 +48,6 @@ __pycache__/
 *$py.class
 
 # Distribution / packaging
-.env
 venv/
 env/
 ENV/
@@ -80,7 +76,6 @@ pip-delete-this-directory.txt
 test-results/
 
 # Environments
-.env
 .env.local
 
 # Mac system files
@@ -92,4 +87,3 @@ test-results/
 
 # Docker
 docker-compose.yml
-*.env
