@@ -14,7 +14,19 @@ spec:
         name: grafana-loki
         namespace: monitoring
   values:
+    loki:
+      commonConfig:
+        replication_factor: 1
+      storage:
+        type: memory 
+      schemaConfig:
+        configs:
+          - from: 2020-10-24
+            store: boltdb-shipper
+            object_store: memory 
+            schema: v11
+            index:
+              prefix: index_
+              period: 168h 
     persistence:
       enabled: false 
-    retention: "24h" 
-    
