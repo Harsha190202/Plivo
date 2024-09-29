@@ -4,6 +4,8 @@ metadata:
   name: elasticsearch
   namespace: logging
 spec:
+  interval: 5m
+  timeout: 10m
   releaseName: elasticsearch
   chart:
     spec:
