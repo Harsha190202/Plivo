@@ -14,11 +14,7 @@ spec:
         name: elastic
         namespace: flux-system
   values:
-    replicas: 2
-    resources:
-      requests:
-        memory: 1Gi
-        cpu: 100m
+    replicas: 1
     service:
       type: ClusterIP
 
