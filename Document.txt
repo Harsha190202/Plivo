@@ -60,6 +60,8 @@ applications have deployment containing replicaset , pods used rolling update st
 budget , Added pod security to run them as nonroot users , added one network policy so that pods in application namespace
 cant talk to other namespace ,we can node anti-affinity for high available service .
 
+created some example service account , alerting , hpa we can change the values.yaml for changes 
+
 Exposed microservcices with ingress resource (to expose services to internet) with path based routing(added all routes in single resource)
 
 

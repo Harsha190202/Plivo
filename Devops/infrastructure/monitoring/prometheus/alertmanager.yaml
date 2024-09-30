@@ -1,0 +1,20 @@
+# Sample config
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alertmanager-config
+  namespace: monitoring
+data:
+  alertmanager.yaml: |
+    route:
+      receiver: 'email-alerts'
+
+    receivers:
+    - name: 'email-alerts'
+      email_configs:
+      - to: <email>
+        from: 'alertmanager@example.com'
+        smarthost: <host>
+        auth_username: <username>
+        auth_password: <password>

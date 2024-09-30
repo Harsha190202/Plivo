@@ -31,6 +31,10 @@ spec:
             key: alerts.yml
     alertmanager:
       enabled: true
+       config:
+          configMap:
+            name: alertmanager-config     
+            key: alertmanager.yaml
     kube-state-metrics:
       enabled: true
     prometheus-node-exporter:
