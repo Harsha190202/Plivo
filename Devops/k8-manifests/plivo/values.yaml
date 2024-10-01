@@ -91,6 +91,7 @@ readinessProbe:
 
 
 maxUnavailable: 1
+minAvailable: 1
 
 
 autoscaling:

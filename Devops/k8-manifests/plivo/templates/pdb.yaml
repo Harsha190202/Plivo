@@ -4,7 +4,7 @@ metadata:
   name: {{ .Chart.Name }}-pdb
   namespace: {{ .Values.env }}
 spec:
-  maxUnavailable: {{ .Values.maxUnavailable }}
+  minAvailable: {{ .Values.minAvailable }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
