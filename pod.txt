@@ -1,0 +1,12 @@
+Security context : 
+RunAsUser 
+RunAsGroup
+etc
+
+
+Network policies : 
+tells which pod can talk which pod 
+
+sa : 
+
+RBAC for pods
