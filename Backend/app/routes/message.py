@@ -12,7 +12,7 @@ router = APIRouter()
 
 @router.post("/create", response_model=MessageResponse)
 async def create_message(message: MessageCreate, session: AsyncSession = Depends(get_async_session)):
-    new_message = MessageModel(**message.dict())
+    new_message = MessageModel(**message.model_dump())
     
     try:
         session.add(new_message)

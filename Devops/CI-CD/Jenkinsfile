@@ -64,7 +64,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'github-pat', variable: 'GITHUB_TOKEN')]) {
                         sh """
-                        sed -i 's|image: .*|image: ${dockerImage}|g' Devops/k8-manifests/plivo/values.yaml
+                        sed -i 's|image: .+*|image: ${dockerImage}|g' Devops/k8-manifests/plivo/values.yaml
                         git add Devops/k8-manifests/plivo/values.yaml
                         git commit -m "Jenkins image update"
                         git pull https://${GITHUB_TOKEN}@github.com/Harsha190202/EKS.git main

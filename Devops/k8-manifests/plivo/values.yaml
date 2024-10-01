@@ -1,7 +1,7 @@
 replicaCount: 1
 
-image:
-  image: harsha3330/plivo:main-13-date-20240928-132654
+image: 
+  imagetag: harsha3330/plivo:main-13-date-20240928-132654
   repository: nginx
   pullPolicy: IfNotPresent
   tag: ""
@@ -11,7 +11,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  create: true
+  create: false
   automount: true
   annotations: {}
   name: ""
