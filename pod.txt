@@ -10,3 +10,6 @@ tells which pod can talk which pod
 sa : 
 
 RBAC for pods
+
+headless service 
+.* vs +*
