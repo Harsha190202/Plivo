@@ -4,7 +4,7 @@ metadata:
   name: {{ .Chart.Name }}-pdb
   namespace: {{ .Values.env }}
 spec:
-  minAvailable: {{ .Values.minAvailable }}
+  minAvailable: {{ .Values.minAvailable }} #maxUnavailable mentions how many pods will be terminated 
   selector:
     matchLabels:
       app: {{ .Chart.Name }}

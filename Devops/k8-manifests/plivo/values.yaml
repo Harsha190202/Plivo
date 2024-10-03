@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 image: 
   imagetag: harsha3330/plivo:main-13-date-20240928-132654
